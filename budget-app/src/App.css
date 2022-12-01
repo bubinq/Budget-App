@@ -1,0 +1,252 @@
+*::after,
+*::before,
+body {
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  overflow: hidden;
+}
+:root {
+  --main-color: #239df4;
+}
+body {
+  margin: 0;
+}
+.contentWrapper {
+  display: flex;
+  width: 100%;
+  caret-color: transparent;
+  transition: all 0.4s ease;
+}
+.headerWrapper {
+  display: flex;
+  width: 100vw;
+  background-color: #192235;
+  height: 50px;
+  transition: all 0.4s ease;
+}
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 98%;
+  margin: 0 auto;
+  caret-color: transparent;
+}
+.mainWrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: #282c34;
+  transition: all 0.4s ease;
+}
+.menuWrapper {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px;
+  height: 30px;
+  width: 30px;
+  caret-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.menu:hover {
+  outline: 2px solid var(--main-color);
+  border-radius: 50%;
+}
+.menu > div {
+  background-color: var(--main-color);
+  height: 2px;
+}
+.heading {
+  display: flex;
+  color: var(--main-color);
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
+.settings {
+  position: relative;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.settings > img {
+  width: 100%;
+  height: 100%;
+}
+
+.sideWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  height: 100vh;
+  width: 70px;
+  background-color: #3a4356;
+  transition: all 0.4s ease;
+}
+
+.dropDown {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  width: 220px;
+  background-color: #3a4356;
+  left: -650%;
+  top: 150%;
+  cursor: auto;
+  transition: all 0.4s ease;
+}
+
+.dropDownHeading {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 1.2em;
+  color: var(--main-color);
+}
+.themeSlider {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+}
+.textAndIcon {
+  display: flex;
+  align-items: center;
+}
+.profileSection {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.profileSection > a {
+  text-decoration: none;
+  font-size: 1.1em;
+}
+.themeText {
+  margin-left: 22px;
+}
+
+.profileIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #192235;
+}
+.profileIcon > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.manageWrapper {
+  margin-top: 15px;
+}
+
+.manageWrapper, .statisticsWrapper {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.manageWrapper:hover, .statisticsWrapper:hover {
+  transform: scale(1.2);
+}
+
+.errorWrapper {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
+  background-color: rgb(255, 124, 168);
+}
+
+.switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 42px;
+}
+
+.switch input {
+  display:none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 18px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 18px;
+}
+
+input:checked + .slider {
+  background-color: #ff9239;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.hide {
+  animation-name: hide;
+  animation-duration: .4s;
+  animation-fill-mode: forwards; 
+}
+.show {
+  animation-name: show;
+  animation-duration: .4s;
+  animation-fill-mode: forwards; 
+}
+@keyframes hide {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: -70px;
+  }
+}
+
+@keyframes show {
+  0% {
+    left: -70px;
+  }
+  100% {
+    left: 0px;
+  }
+}
