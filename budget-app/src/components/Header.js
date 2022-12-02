@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import "../App.css";
-import {instance} from "../api/instance"
+import { instance } from "../api/instance";
 import { BudgetContext } from "../context/budgterContext";
 import { Link } from "react-router-dom";
 import { BsFillSunFill } from "react-icons/bs";
@@ -26,11 +26,11 @@ export const Header = () => {
   const logoutHandler = async (ev) => {
     ev.preventDefault();
     if (window.confirm("Are you sure you want to logout?")) {
-      await instance.get("auth/logout", {withCredentials: true})
-      setUser(null)
-      sessionStorage.clear()
+      await instance.get("auth/logout", { withCredentials: true });
+      setUser(null);
+      sessionStorage.clear();
     }
-  }
+  };
 
   return (
     <header
@@ -45,11 +45,16 @@ export const Header = () => {
             <div></div>
           </div>
           <div className="heading">
-            <h1>Home</h1>
+            <h1>Manage Expenses</h1>
           </div>
         </div>
 
-        <div className="settings" onClick={() => {setDropDownToggle(!dropDownToggle)}}>
+        <div
+          className="settings"
+          onClick={() => {
+            setDropDownToggle(!dropDownToggle);
+          }}
+        >
           <img
             src="https://cdn-icons-png.flaticon.com/512/3405/3405846.png"
             alt="Settings icon"
@@ -60,7 +65,6 @@ export const Header = () => {
               style={{
                 backgroundColor: lightOrDark.dropDown,
                 boxShadow: lightOrDark.dropShadow,
-                
               }}
               onClick={handleDropDown}
             >
@@ -91,10 +95,17 @@ export const Header = () => {
               </div>
 
               <div className="profileSection">
-                <div className="profileIcon">
-                  {user && (
-                    <img src={user.profileUrl} alt="User profile"></img>
-                  )}
+                <div className="profile">
+                  <div className="profileIcon">
+                    {user && (
+                      <img src={user.profileUrl} alt="User profile"></img>
+                    )}
+                  </div>
+                  <div className="profileName">
+                    <span style={{ color: lightOrDark.text }}>
+                      {user?.displayName}
+                    </span>
+                  </div>
                 </div>
 
                 {!user ? (
@@ -102,7 +113,11 @@ export const Header = () => {
                     Log In
                   </Link>
                 ) : (
-                  <Link to="/" style={{ color: lightOrDark.text }} onClick={logoutHandler}>
+                  <Link
+                    to="/"
+                    style={{ color: lightOrDark.text }}
+                    onClick={logoutHandler}
+                  >
                     Log Out
                   </Link>
                 )}

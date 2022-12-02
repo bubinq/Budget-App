@@ -22,7 +22,6 @@ body {
   width: 100vw;
   background-color: #192235;
   height: 50px;
-  transition: all 0.4s ease;
 }
 .headerContent {
   display: flex;
@@ -33,6 +32,8 @@ body {
   caret-color: transparent;
 }
 .mainWrapper {
+  display: flex;
+  justify-content: space-evenly;
   width: 100%;
   height: 100vh;
   background-color: #282c34;
@@ -107,6 +108,7 @@ body {
   top: 150%;
   cursor: auto;
   transition: all 0.4s ease;
+  z-index: 1000;
 }
 
 .dropDownHeading {
@@ -128,6 +130,7 @@ body {
 .profileSection {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 90%;
   margin: 0 auto;
   margin-bottom: 20px;
@@ -139,7 +142,105 @@ body {
 .themeText {
   margin-left: 22px;
 }
+.profile {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
 
+.profileName {
+  max-width: 66px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.chartWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.chartHeading > h1{
+  margin: 0;
+}
+
+.stepOne {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+  gap: 10px;
+}
+
+.transactionsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.budgetTotal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+.budgetTotal > h1 {
+  margin: 0;
+}
+
+.stepsHeading > h1 {
+  font-size: 1.5em;
+  margin: 0;
+  color: var(--main-color);
+  text-align: center;
+}
+
+.chartWrapper > canvas {
+  padding: 10px;
+  width: 350px;
+  height: 350px;
+}
+
+.buble {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 80px;
+  background-color: var(--main-color);
+  border-radius: 4%;
+  margin-top: 15px;
+  padding: 0px 30px;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 1px 4px 7px 2px rgba(0, 0, 0, 0.32);
+}
+
+.buble > input, select {
+  margin-top: 30px;
+}
+
+.addTransaction {
+  width: 80%;
+  margin: 0 auto;
+  outline: 1px solid black;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  font-size: 1.2em;
+  letter-spacing: 1px;
+  background-color: rgb(255, 72, 136);
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.addTransaction:hover{
+  background-color: transparent;
+  outline: 1px solid rgb(255, 72, 136);
+  color: rgb(255, 72, 136);
+}
 .profileIcon {
   width: 30px;
   height: 30px;
@@ -156,11 +257,13 @@ body {
   margin-top: 15px;
 }
 
-.manageWrapper, .statisticsWrapper {
+.manageWrapper,
+.statisticsWrapper {
   transition: all 0.3s ease;
   cursor: pointer;
 }
-.manageWrapper:hover, .statisticsWrapper:hover {
+.manageWrapper:hover,
+.statisticsWrapper:hover {
   transform: scale(1.2);
 }
 
@@ -181,7 +284,7 @@ body {
 }
 
 .switch input {
-  display:none;
+  display: none;
 }
 
 .slider {
@@ -192,7 +295,7 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -202,7 +305,7 @@ body {
   height: 18px;
   left: 4px;
   position: absolute;
-  transition: .4s;
+  transition: 0.4s;
   width: 18px;
 }
 
@@ -222,16 +325,15 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-
 .hide {
   animation-name: hide;
-  animation-duration: .4s;
-  animation-fill-mode: forwards; 
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
 }
 .show {
   animation-name: show;
-  animation-duration: .4s;
-  animation-fill-mode: forwards; 
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
 }
 @keyframes hide {
   0% {

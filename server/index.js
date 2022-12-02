@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.js";
+import expenseRouter from "./routes/expenses.js"
 
 const app = express();
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use("/auth", authRouter);
+app.use("/expenses", expenseRouter)
 
 mongoose
   .connect(process.env.MONGO_DB)
