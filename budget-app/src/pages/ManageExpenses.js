@@ -3,7 +3,7 @@ import { Side } from "../components/Side";
 import { Main } from "../components/Main";
 import { useTheme } from "../hooks/useTheme";
 import { useContext } from "react";
-import { BudgetContext } from "../context/budgterContext";
+import { BudgetContext } from "../context/budgetContext";
 
 export const ManageExpenses = () => {
   const theme = useTheme()

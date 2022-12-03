@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { instance } from "../api/instance";
 import { ErrorMessage } from "../components/ErrorMessage";
-import { BudgetContext } from "../context/budgterContext";
+import { BudgetContext } from "../context/budgetContext";
 
 export const Register = () => {
   const { setUser } = useContext(BudgetContext);

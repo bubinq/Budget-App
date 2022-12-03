@@ -1,30 +1,14 @@
-import { useContext } from "react";
-import { BudgetContext } from "./context/budgterContext";
-
-export function useGraphData() {
-  const {expenses} = useContext(BudgetContext)
-  console.log(expenses);
-  const config = {
-    data: {
-      labels: ["Red", "Blue", "Yellow"],
-      datasets: [
-        {
-          label: "My First Dataset",
-          data: [30, 200],
-          backgroundColor: [
-            "rgb(255, 191, 0)"
-          ],
-          hoverOffset: 3,
-          borderRadius: 15,
-          spacing: 20,
-        },
-      ],
-    },
-
-    options: {
-      cutout: 125,
-      radius: 150,
-    },
-  };
-  return config;
+export function getBudgetColor(budget, current) {
+  let rate = current / budget;
+  let color = "#05f505";
+  if (rate < 0.75) {
+    color = "#f5dd05";
+  }
+  if (rate < 0.5) {
+    color = "#f58105";
+  }
+  if (rate < 0.25) {
+    color = "#f52505"
+  }
+  return color;
 }

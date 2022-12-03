@@ -3,29 +3,27 @@ import { useSessionStorage } from "../hooks/useSessionStorage";
 
 export const BudgetContext = createContext();
 
-function expensesManager(state, action) {
+function budgetManager(state, action) {
   switch (action.type) {
+    case "GET":
     case "ADD":
-      return [...state, { ...action.payload }];
+    case "EDIT":
+      return  {...action.payload};
 
     default:
       return state;
   }
 }
 
-function expensesInitializer() {
-  const session = JSON.parse(sessionStorage.getItem("expenses"));
+function budgetInitializer() {
+  const session = JSON.parse(sessionStorage.getItem("budget"));
   return session || [];
 }
 
 export const BudgetProvider = ({ children }) => {
+  const [budget, dispatcher] = useReducer(budgetManager, [], budgetInitializer);
+  const [budgetSession, setBudgetSession] = useSessionStorage("budget");
   const [user, setUser] = useSessionStorage("user");
-  const [expenses, dispatcher] = useReducer(
-    expensesManager,
-    [],
-    expensesInitializer
-  );
-  const [expensesStorage, setExpensesStorage] = useSessionStorage("expenses");
   const [theme, setTheme] = useState("dark");
   const [selectedMenu, setSelectedMenu] = useState("");
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -56,8 +54,9 @@ export const BudgetProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setExpensesStorage(expenses);
-  }, [expenses, setExpensesStorage]);
+    setBudgetSession(budget);
+    //eslint-disable-next-line
+  }, [budget]);
 
   return (
     <BudgetContext.Provider
@@ -74,9 +73,9 @@ export const BudgetProvider = ({ children }) => {
         theme,
         setTheme,
         toggleTheme,
-        expenses,
+        budget,
         dispatcher,
-        expensesStorage
+        budgetSession,
       }}
     >
       {children}

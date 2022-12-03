@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import "../App.css";
 import { instance } from "../api/instance";
-import { BudgetContext } from "../context/budgterContext";
+import { BudgetContext } from "../context/budgetContext";
 import { Link } from "react-router-dom";
 import { BsFillSunFill } from "react-icons/bs";
 import { useTheme } from "../hooks/useTheme";
@@ -29,6 +29,7 @@ export const Header = () => {
       await instance.get("auth/logout", { withCredentials: true });
       setUser(null);
       sessionStorage.clear();
+      window.location.reload();
     }
   };
 

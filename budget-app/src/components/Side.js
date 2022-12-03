@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BudgetContext } from "../context/budgterContext";
+import { BudgetContext } from "../context/budgetContext";
 import { useTheme } from "../hooks/useTheme";
 import {BsBank} from "react-icons/bs"
 import {RiDashboardFill} from "react-icons/ri"
