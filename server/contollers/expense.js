@@ -26,3 +26,13 @@ export const addExpense = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const deleteExpense = async (req, res) => {
+  try {
+    await Expense.findByIdAndDelete(req.params.expenseId);
+    res.status(200).json("Successfully removed expense!");
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ message: error.message });
+  }
+};

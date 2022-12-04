@@ -5,13 +5,15 @@ import { instance } from "../api/instance";
 import { BudgetContext } from "../context/budgetContext";
 import { ErrorMessage } from "./ErrorMessage";
 import { ExpenseContext } from "../context/expenseContext";
-import {getBudgetColor} from "../utilities"
+import { useNavigate } from "react-router-dom";
+import { getBudgetColor } from "../utilities";
 
 export const BudgetForm = () => {
   const theme = useTheme();
   const { dispatcher, budget, user } = useContext(BudgetContext);
   const { expenses } = useContext(ExpenseContext);
   const [error, setError] = useState({ message: "" });
+  const navigatoTo = useNavigate();
 
   const totalExpenses = expenses.reduce(
     (sum, currAmount) => sum + currAmount.amount,
@@ -51,6 +53,12 @@ export const BudgetForm = () => {
     }
   };
 
+  const handleRedirect = () => {
+    if (!user) {
+      navigatoTo("/login")
+    }
+  };
+
   useEffect(() => {
     const loadBudget = async (id) => {
       const userBudget = await instance.get(`budget/get/${id}`);
@@ -72,6 +80,7 @@ export const BudgetForm = () => {
           <input
             style={{ color: theme.text }}
             className="budgetInput"
+            onFocus={handleRedirect}
             type="text"
             placeholder="Set Budget"
             name="amount"
@@ -90,7 +99,16 @@ export const BudgetForm = () => {
           <span className="budgetAmount" style={{ color: theme.text }}>
             Initial: ${budget[0].amount}
           </span>
-          <span style={{ color: getBudgetColor(budget[0].amount, budget[0].amount - totalExpenses) }}>Current: ${budget[0].amount - totalExpenses}</span>
+          <span
+            style={{
+              color: getBudgetColor(
+                budget[0].amount,
+                budget[0].amount - totalExpenses
+              ),
+            }}
+          >
+            Current: ${budget[0].amount - totalExpenses}
+          </span>
         </>
       )}
     </div>

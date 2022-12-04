@@ -4,12 +4,14 @@ import { useTheme } from "../hooks/useTheme";
 import { instance } from "../api/instance";
 import { ErrorMessage } from "./ErrorMessage";
 import { BudgetContext } from "../context/budgetContext";
+import { useNavigate } from "react-router-dom";
 
 export const Form = () => {
   const [error, setError] = useState({
     message: "",
   });
   const theme = useTheme();
+  const navigatoTo = useNavigate();
   const { user } = useContext(BudgetContext);
   const { dispatcher } = useContext(ExpenseContext);
   const submitHandler = async (ev) => {
@@ -43,6 +45,12 @@ export const Form = () => {
     } catch (error) {
       const msg = error.response.data.message;
       setError({ message: msg });
+    }
+  };
+
+  const handleRadirect = () => {
+    if (!user) {
+      navigatoTo("/login");
     }
   };
 
@@ -82,6 +90,7 @@ export const Form = () => {
         {error.message && <ErrorMessage message={error.message}></ErrorMessage>}
         <label className="buble" htmlFor="budget">
           <input
+            onFocus={handleRadirect}
             id="budget"
             type="text"
             placeholder="Amount:"

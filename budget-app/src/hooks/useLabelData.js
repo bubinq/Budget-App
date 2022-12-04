@@ -1,0 +1,22 @@
+import { useContext } from "react";
+import { ExpenseContext } from "../context/expenseContext";
+import _ from "lodash";
+import { BudgetContext } from "../context/budgetContext";
+
+export function useLabelData() {
+  const { expenses } = useContext(ExpenseContext);
+  const { budget } = useContext(BudgetContext);
+
+  const labelData = _.chain(expenses)
+    .groupBy("category")
+    .map((obj, idx) => {
+      return {
+        percentage: (_.sumBy(obj, "amount") / budget[0]?.amount) * 100,
+        category: idx,
+        color: obj[0].color,
+      };
+    })
+    .value();
+
+  return labelData;
+}
