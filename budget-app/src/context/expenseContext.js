@@ -6,9 +6,11 @@ export const ExpenseContext = createContext();
 function expensesManager(state, action) {
   switch (action.type) {
     case "READ":
-        return [...action.payload]
+      return [...action.payload];
     case "ADD":
       return [...state, { ...action.payload }];
+    case "DELETE":
+      return [...state.filter((expense) => expense._id !== action.id)];
 
     default:
       return state;
@@ -38,7 +40,7 @@ export const ExpenseProvider = ({ children }) => {
       value={{
         expenses,
         dispatcher,
-        expensesStorage
+        expensesStorage,
       }}
     >
       {children}

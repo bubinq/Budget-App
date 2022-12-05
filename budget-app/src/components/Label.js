@@ -1,7 +1,7 @@
 import { useTheme } from "../hooks/useTheme";
 
 export const Label = ({ data }) => {
-    const theme = useTheme()
+  const theme = useTheme();
   return (
     <div className="labelData">
       <div
@@ -13,8 +13,13 @@ export const Label = ({ data }) => {
           borderRadius: "35%",
         }}
       ></div>
-      <span className="percentage" style={{color: theme.text}}>% {Math.round(data.percentage)}</span>
-      <span className="categoryName" style={{color: theme.text}}> {data.category}</span>
+      <span className="percentage" style={{ color: theme.text }}>
+        % {Math.round(data.percentage)}
+      </span>
+      <span className="categoryName" style={{ color: theme.text }}>
+        {" "}
+        {data.category}
+      </span>
     </div>
   );
 };

@@ -13,7 +13,10 @@ body {
 }
 .contentWrapper {
   display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100vh;
+  background-color: #282c34;
   caret-color: transparent;
   transition: all 0.4s ease;
 }
@@ -35,7 +38,6 @@ body {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  height: 100vh;
   background-color: #282c34;
   transition: all 0.4s ease;
 }
@@ -83,6 +85,7 @@ body {
 .settings > img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .sideWrapper {
@@ -158,7 +161,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .chartHeading > h1 {
@@ -169,21 +172,21 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 20px;
   gap: 10px;
 }
 
 .transactionsForm {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 .budgetTotal {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .budgetTotal > h1 {
   margin: 0;
@@ -197,7 +200,7 @@ body {
 }
 
 .chartWrapper > canvas {
-  padding: 10px;
+  padding: 15px;
   width: 325px;
   height: 325px;
 }
@@ -205,18 +208,17 @@ body {
 .graphLabelWrapper {
   position: absolute;
   left: 32.5%;
-  top: 21%;
+  top: 18%;
 }
 
 .buble {
   display: flex;
   flex-direction: column;
   width: 240px;
-  height: 80px;
+  height: 60px;
   background-color: var(--main-color);
   border-radius: 4%;
-  margin-top: 15px;
-  padding: 0px 30px;
+  padding: 0px 25px;
   color: white;
   transition: all 0.3s ease;
   box-shadow: 1px 4px 7px 2px rgba(0, 0, 0, 0.32);
@@ -224,7 +226,7 @@ body {
 
 .buble > input,
 select {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .addTransaction {
@@ -279,7 +281,7 @@ select {
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom:1px solid var(--main-color);
+  border-bottom: 1px solid var(--main-color);
   padding: 6px 8px;
 }
 
@@ -305,6 +307,55 @@ select {
   background-color: rgb(255, 124, 168);
 }
 
+.transactionsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: -30px;
+  justify-content: space-evenly;
+}
+.transactionsWrapper > h1 {
+  text-align: center;
+  font-size: 1.6em;
+  margin: 0;
+}
+
+.tansactionsHeading {
+  display: grid;
+  width: 80%;
+  margin: 0 auto;
+  grid-template-columns: repeat(4, 130px);
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.expensesWrapper {
+  display: flex;
+  margin-top: 40px;
+  gap: 10px;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  height: 250px;
+  padding-bottom: 40px;
+  overflow-y: auto;
+}
+
+.expenseItem {
+  display: grid;
+  grid-template-columns: repeat(4, 130px);
+  justify-content: space-evenly;
+}
+
+.dates {
+  word-spacing: 1px;
+}
+
+.expenseAmount {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
 .switch {
   display: inline-block;
   height: 24px;
@@ -380,4 +431,23 @@ input:checked + .slider:before {
   100% {
     left: 0px;
   }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
