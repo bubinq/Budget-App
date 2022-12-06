@@ -5,6 +5,7 @@ import { BudgetContext } from "../context/budgetContext";
 import { Link } from "react-router-dom";
 import { BsFillSunFill } from "react-icons/bs";
 import { useTheme } from "../hooks/useTheme";
+import { useLocation } from "react-router-dom";
 
 export const Header = () => {
   const {
@@ -17,6 +18,7 @@ export const Header = () => {
     setDropDownToggle,
   } = useContext(BudgetContext);
   const lightOrDark = useTheme();
+  const { pathname } = useLocation();
 
   const handleDropDown = (ev) => {
     ev.stopPropagation();
@@ -46,7 +48,7 @@ export const Header = () => {
             <div></div>
           </div>
           <div className="heading">
-            <h1>Manage Expenses</h1>
+            <h1>{pathname === "/" ? "Manage Expenses" : "Statistics"}</h1>
           </div>
         </div>
 

@@ -56,7 +56,7 @@ export const Form = () => {
 
   useEffect(() => {
     const loadUserExpenses = async (id) => {
-      const expenses = await instance.get(`/expenses/get/${id}`);
+      const expenses = await instance.get(`/expenses/all/${id}`);
       dispatcher({
         type: "READ",
         payload: expenses.data,
