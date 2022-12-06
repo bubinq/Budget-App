@@ -3,6 +3,7 @@ import { Side } from "../components/Side";
 import { useTheme } from "../hooks/useTheme";
 import { useContext } from "react";
 import { BudgetContext } from "../context/budgetContext";
+import { StatsMain } from "../components/StatsMain";
 
 export const Statistics = () => {
   const theme = useTheme();
@@ -18,6 +19,7 @@ export const Statistics = () => {
         }}
       >
         <Side></Side>
+        <StatsMain></StatsMain>
       </div>
     </>
   );

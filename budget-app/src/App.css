@@ -18,7 +18,6 @@ body {
   height: 100vh;
   background-color: #282c34;
   caret-color: transparent;
-  transition: all 0.4s ease;
 }
 .headerWrapper {
   display: flex;
@@ -39,7 +38,6 @@ body {
   justify-content: space-evenly;
   width: 100%;
   background-color: #282c34;
-  transition: all 0.4s ease;
 }
 .menuWrapper {
   display: flex;
@@ -97,7 +95,8 @@ body {
   height: 100vh;
   width: 70px;
   background-color: #3a4356;
-  transition: all 0.4s ease;
+  transition: all 0.2s ease;
+  z-index: 1000;
 }
 
 .dropDown {
@@ -345,6 +344,11 @@ select {
   display: grid;
   grid-template-columns: repeat(4, 130px);
   justify-content: space-evenly;
+}
+
+.pieChartWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .dates {
