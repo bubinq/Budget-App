@@ -1,13 +1,45 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { useGooglePieData } from "../hooks/useGooglePieData";
 import { useTheme } from "../hooks/useTheme";
+import { instance } from "../api/instance";
+import { BudgetContext } from "../context/budgetContext";
+import { MonthlyDistributionContext } from "../context/monthlyDistributionContext";
 
 export const StatsMain = () => {
   const theme = useTheme();
+  const { user } = useContext(BudgetContext);
+  const { dispatcher } = useContext(MonthlyDistributionContext);
   const { data, options } = useGooglePieData();
   const [year, setYear] = useState(2022);
   const [month, setMonth] = useState(new Date().getMonth() + 1);
+
+  const monthHandler = (ev) => {
+    setMonth(parseInt(ev.target.value));
+  };
+
+  const yearHandler = (ev) => {
+    setYear(parseInt(ev.target.value));
+  };
+
+  useEffect(() => {
+    const changeDateHandler = async () => {
+      const response = await instance.post(
+        `/expenses/userPref/${user?._id}`,
+        {
+          month,
+          year,
+        },
+        { withCredentials: true }
+      );
+      dispatcher({
+        type: "READ",
+        payload: response.data,
+      });
+    };
+    changeDateHandler();
+    //eslint-disable-next-line
+  }, [year, month, user]);
 
   return (
     <div className="mainWrapper" style={{ backgroundColor: theme.main }}>
@@ -15,11 +47,11 @@ export const StatsMain = () => {
         <div className="dateSelect">
           <form>
             <select
+              style={{ color: theme.text }}
+              className="yearSelect"
               defaultValue={year}
               name="year"
-              onChange={(ev) => {
-                setYear(parseInt(ev.target.value));
-              }}
+              onChange={yearHandler}
             >
               <option value={2015}>2015</option>
               <option value={2016}>2016</option>
@@ -31,11 +63,11 @@ export const StatsMain = () => {
               <option value={2022}>2022</option>
             </select>
             <select
+              style={{ color: theme.text }}
+              className="monthSelect"
               name="month"
               defaultValue={month}
-              onChange={(ev) => {
-                setMonth(parseInt(ev.target.value));
-              }}
+              onChange={monthHandler}
             >
               <option value={1}>1</option>
               <option value={2}>2</option>

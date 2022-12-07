@@ -1,19 +1,19 @@
 import { useContext } from "react";
-import { ExpenseContext } from "../context/expenseContext";
 import _ from "lodash";
 import { useTheme } from "./useTheme";
+import { MonthlyDistributionContext } from "../context/monthlyDistributionContext";
 
 export const useGooglePieData = () => {
-  const { expenses } = useContext(ExpenseContext);
+  const {monthlyExpenses} = useContext(MonthlyDistributionContext)
   const theme = useTheme();
-  const amountByCategory = _.chain(expenses)
+  const amountByCategory = _.chain(monthlyExpenses)
     .groupBy("category")
     .map((obj, idx) => {
       return [idx, _.sumBy(obj, "amount")];
     })
     .value();
 
-  const colors = _.chain(expenses)
+  const colors = _.chain(monthlyExpenses)
     .map((obj) => obj.color)
     .uniq()
     .value();
@@ -27,8 +27,8 @@ export const useGooglePieData = () => {
     legend: {position: "none"},
     titleTextStyle: { color: theme.text, fontSize: 20, position: "bottom" },
     chartArea: {
-        width: '75%',
-        height: 300
+        width: '65%',
+        height: 250
     },
   };
 

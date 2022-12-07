@@ -24,6 +24,20 @@ export const getAllUserExpenses = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const getUserPrefExpenses = async (req, res) => {
+  const { month, year } = req.body;
+  const lastDay = new Date(year, month, 0).getDate();
+  try {
+    const expenses = await Expense.find({ ownerId: req.params.userId })
+      .gte("createdAt", `${year}-${month < 10? "0" : ""}${month}-01T00:00:00Z`)
+      .lte("createdAt", `${year}-${month < 10? "0" : ""}${month}-${lastDay}T00:00:00Z`);
+    res.status(200).json(expenses);
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ message: error.message });
+  }
+};
 export const getMonthlyUserExpenses = async (req, res) => {
   const date = new Date();
   const currMonth = date.getMonth();

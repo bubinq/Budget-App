@@ -48,7 +48,7 @@ export const Header = () => {
             <div></div>
           </div>
           <div className="heading">
-            <h1>{pathname === "/" ? "Manage Expenses" : "Statistics"}</h1>
+            <h1>{pathname === "/" ? "Manage Expenses" : "Account Stats"}</h1>
           </div>
         </div>
 

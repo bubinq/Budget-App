@@ -409,6 +409,17 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.monthSelect, .yearSelect {
+  background-color:#3a4356;
+  padding: 6px;
+  border: none;
+  outline: none;
+}
+
+.monthSelect {
+  margin-left: 5px;
+}
+
 .hide {
   animation-name: hide;
   animation-duration: 0.4s;

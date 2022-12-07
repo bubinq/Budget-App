@@ -1,11 +1,12 @@
 import express from "express"
 import { verifyToken } from "../verifyToken.js"
-import { addExpense, deleteExpense, getRecentUserExpenses, getAllUserExpenses, getMonthlyUserExpenses, getYearlyUserExpenses } from "../contollers/expense.js"
+import { addExpense, deleteExpense, getRecentUserExpenses, getAllUserExpenses, getMonthlyUserExpenses, getYearlyUserExpenses, getUserPrefExpenses } from "../contollers/expense.js"
 
 
 const router = express.Router()
 
 router.get("/all/:userId", getAllUserExpenses)
+router.post("/userPref/:userId", getUserPrefExpenses)
 router.get("/monthly/:userId", getMonthlyUserExpenses)
 router.get("/yearly/:userId", getYearlyUserExpenses)
 router.get("/recent/:userId", getRecentUserExpenses)
