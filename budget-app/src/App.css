@@ -349,6 +349,11 @@ select {
 .pieChartWrapper {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+}
+
+.barChartWrapper {
+  margin-top: 20px;
 }
 
 .dates {
@@ -411,9 +416,20 @@ input:checked + .slider:before {
 
 .monthSelect, .yearSelect {
   background-color:#3a4356;
+  margin-top: 5px;
   padding: 6px;
   border: none;
   outline: none;
+}
+.dateForm {
+  display: flex;
+  gap: 5px;
+}
+.monthWrapper, .yearWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .monthSelect {

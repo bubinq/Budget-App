@@ -5,6 +5,7 @@ import { BudgetProvider } from "./context/budgetContext";
 import { ExpenseProvider } from "./context/expenseContext";
 import { BrowserRouter } from "react-router-dom";
 import { MonthlyDistributionProvider } from "./context/monthlyDistributionContext";
+import { TotalDistributionProvider } from "./context/monthlyTotalContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,7 +13,9 @@ root.render(
     <ExpenseProvider>
       <BudgetProvider>
         <MonthlyDistributionProvider>
-          <App />
+          <TotalDistributionProvider>
+            <App />
+          </TotalDistributionProvider>
         </MonthlyDistributionProvider>
       </BudgetProvider>
     </ExpenseProvider>
