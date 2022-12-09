@@ -1,23 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import _ from "lodash";
+import { useEffect, useState } from "react";
 import { useTheme } from "./useTheme";
-import { TotalDistributionContext } from "../context/monthlyTotalContext";
-import { instance } from "../api/instance";
 import { getLastThreeMonths } from "../utilities";
 import { getLastThreeMonthsAmounts } from "../api/instance";
+import { colors } from "../utilities";
 
 export const useGoogleBarData = (year, month) => {
-  const { totalExpenses, dispatch } = useContext(TotalDistributionContext);
   const [amounts, setAmounts] = useState([]);
   const theme = useTheme();
 
   const lastThreeMonths = getLastThreeMonths(year, month);
-
-  const colors = _.chain(totalExpenses)
-    .map((obj) => obj.color)
-    .uniq()
-    .value();
-
   const barData = [
     [
       "Month",
@@ -33,7 +24,7 @@ export const useGoogleBarData = (year, month) => {
       amounts[2]?.Clothes || 0,
       amounts[2]?.Utilities || 0,
       amounts[2]?.Rent || 0,
-      "",
+      `$ ${amounts[2]?.total || 0}`,
     ],
     [
       lastThreeMonths[1],
@@ -41,7 +32,7 @@ export const useGoogleBarData = (year, month) => {
       amounts[1]?.Clothes || 0,
       amounts[1]?.Utilities || 0,
       amounts[1]?.Rent || 0,
-      "",
+      `$ ${amounts[1]?.total || 0}`,
     ],
     [
       lastThreeMonths[2],
@@ -49,42 +40,43 @@ export const useGoogleBarData = (year, month) => {
       amounts[0]?.Clothes || 0,
       amounts[0]?.Utilities || 0,
       amounts[0]?.Rent || 0,
-      "",
+      `$ ${amounts[0]?.total || 0}`,
     ],
   ];
 
   const barOptions = {
     title: "Monthly Total",
-    backgroundColor: theme.main,
-    colors: colors.length > 1 ? colors : ["#808080", "#808080", "#808080"],
+    backgroundColor: "transparent",
+    colors: [colors.Groceries, colors.Clothes, colors.Utilities, colors.Rent],
     bar: { groupWidth: "50%" },
     legend: { position: "none" },
-    titleTextStyle: { color: theme.text, fontSize: 20, position: "bottom" },
+    titleTextStyle: { color: theme.text, fontSize: 25, position: "bottom" },
     chartArea: {
-      width: "85%",
+      width: "65%",
       height: 200,
+    },
+    animation: {
+      duration: 600,
+      easing: "in"
     },
     isStacked: true,
   };
   useEffect(() => {
-    const getTotalMonthly = async () => {
-      const response = await instance.post(
-        `/expenses/totalCompared`,
-        {
-          month,
-          year,
-        },
-        { withCredentials: true }
-      );
-      dispatch({
-        type: "READ",
-        payload: response.data,
+    setAmounts([]);
+    getLastThreeMonthsAmounts(parseInt(year), parseInt(month)).then((data) => {
+      let prevMonthIdx = 0;
+      data.forEach((currMonth) => {
+        debugger;
+        if (month - (currMonth.month + prevMonthIdx) === 2) {
+          setAmounts([{}, {}, currMonth]);
+        } else if (month - (currMonth.month + prevMonthIdx) === 1) {
+          prevMonthIdx++;
+          setAmounts((oldAmounts) => [...oldAmounts, {}, currMonth]);
+        } else {
+          setAmounts((oldAmounts) => [...oldAmounts, currMonth]);
+        }
+        prevMonthIdx++;
       });
-    };
-    getTotalMonthly();
-    getLastThreeMonthsAmounts(parseInt(year), parseInt(month)).then((obj) => {
-      console.log(obj);
-      setAmounts(Object.values(obj));
     });
     //eslint-disable-next-line
   }, [year, month]);

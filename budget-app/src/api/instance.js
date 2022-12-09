@@ -14,9 +14,8 @@ export const getLastThreeMonthsAmounts = async (year, month) => {
     { withCredentials: true }
   );
   const months = new Array(response.data.length);
-  console.log(months);
   for (let i = 0; i < months.length; i++) {
-    months[i] = {month: response.data[i]._id.month};
+    months[i] = {month: response.data[i]._id.month, total: response.data[i].totalAmount};
     for (let j = 0; j < response.data[i].categories.length; j++) {
       const currCateg = response.data[i].categories[j];
       const val = response.data[i].amounts[j];

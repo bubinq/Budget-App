@@ -31,11 +31,11 @@ export const useGooglePieData = (year, month) => {
     backgroundColor: theme.main,
     colors: colors,
     legend: { position: "none" },
-    titleTextStyle: { color: theme.text, fontSize: 20, position: "bottom" },
+    titleTextStyle: { color: theme.text, fontSize: 25, position: "bottom" },
     chartArea: {
       width: "85%",
       height: 220,
-    },
+    }
   };
 
   useEffect(() => {

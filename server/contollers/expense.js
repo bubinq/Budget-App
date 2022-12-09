@@ -16,6 +16,7 @@ export const getRecentUserExpenses = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
 export const getAllUserExpenses = async (req, res) => {
   try {
     const expenses = await Expense.find({ ownerId: req.params.userId });
@@ -56,6 +57,9 @@ export const getLastThreeMonthsAmounts = async (req, res) => {
           categories: {
             $push: "$category",
           },
+          totalAmount: {
+            $sum: "$amount",
+          },
         },
       },
       {
@@ -85,6 +89,7 @@ export const getUserPrefExpenses = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
 export const getMonthlyUserExpenses = async (req, res) => {
   const date = new Date();
   const currMonth = date.getMonth();
@@ -93,32 +98,6 @@ export const getMonthlyUserExpenses = async (req, res) => {
     const expenses = await Expense.find({ ownerId: req.params.userId })
       .gte("createdAt", `2022-${currMonth + 1}-01T00:00:00Z`)
       .lte("createdAt", `2022-${currMonth + 1}-${lastDay}T00:00:00Z`);
-    res.status(200).json(expenses);
-  } catch (error) {
-    console.log(error.message);
-    res.status(400).json({ message: error.message });
-  }
-};
-
-export const getMonthlyComparedToLastTwo = async (req, res) => {
-  const { month, year } = req.body;
-
-  const { lastDay, prevTwoYear, prevTwoMonth, prevTwoDate } = getDateRange(
-    year,
-    month
-  );
-  try {
-    const expenses = await Expense.find({ ownerId: req.user.id })
-      .gt(
-        "createdAt",
-        `${prevTwoYear}-${prevTwoMonth < 10 ? "0" : ""}${prevTwoMonth}-${
-          prevTwoDate < 10 ? "0" : ""
-        }${prevTwoDate}T00:00:00Z`
-      )
-      .lte(
-        "createdAt",
-        `${year}-${month < 10 ? "0" : ""}${month}-${lastDay}T00:00:00Z`
-      );
     res.status(200).json(expenses);
   } catch (error) {
     console.log(error.message);

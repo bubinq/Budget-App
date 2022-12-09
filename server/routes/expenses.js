@@ -7,7 +7,6 @@ import {
   getAllUserExpenses,
   getMonthlyUserExpenses,
   getUserPrefExpenses,
-  getMonthlyComparedToLastTwo,
   getLastThreeMonthsAmounts,
 } from "../contollers/expense.js";
 
@@ -16,7 +15,6 @@ const router = express.Router();
 router.get("/all/:userId", getAllUserExpenses);
 router.post("/getLatest", verifyToken, getLastThreeMonthsAmounts);
 router.post("/userPref/:userId", getUserPrefExpenses);
-router.post("/totalCompared", verifyToken, getMonthlyComparedToLastTwo);
 router.get("/monthly/:userId", getMonthlyUserExpenses);
 router.get("/recent/:userId", getRecentUserExpenses);
 router.post("/create", verifyToken, addExpense);

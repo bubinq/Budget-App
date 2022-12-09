@@ -13,19 +13,11 @@ export function getBudgetColor(budget, current) {
   return color;
 }
 
-export const months = {
-  "01": "January",
-  "02": "February",
-  "03": "March",
-  "04": "April",
-  "05": "May",
-  "06": "June",
-  "07": "July",
-  "08": "August",
-  "09": "September",
-  "10": "October",
-  "11": "November",
-  "12": "December",
+export const colors = {
+  Rent: "rgb(78, 99, 71)",
+  Utilities: "rgb(78, 99, 174)",
+  Clothes: "rgb(78, 30, 174)",
+  Groceries: "rgb(236, 30, 174)",
 };
 
 export const getLastThreeMonths = (year, month) => {
