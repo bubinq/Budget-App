@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTheme } from "./useTheme";
 import { getLastThreeMonths } from "../utilities";
 import { getLastThreeMonthsAmounts } from "../api/instance";
 import { colors } from "../utilities";
+import { ExpenseContext } from "../context/expenseContext";
 
 export const useGoogleBarData = (year, month) => {
   const [amounts, setAmounts] = useState([]);
   const theme = useTheme();
+  const { expensesStorage } = useContext(ExpenseContext);
 
   const lastThreeMonths = getLastThreeMonths(year, month);
   const barData = [
@@ -48,6 +50,13 @@ export const useGoogleBarData = (year, month) => {
     title: "Monthly Total",
     backgroundColor: "transparent",
     colors: [colors.Groceries, colors.Clothes, colors.Utilities, colors.Rent],
+    annotations: {
+      textStyle: {
+        fontSize: 14,
+        bold: true,
+        color: theme.text,
+      },
+    },
     bar: { groupWidth: "50%" },
     legend: { position: "none" },
     titleTextStyle: { color: theme.text, fontSize: 25, position: "bottom" },
@@ -57,16 +66,17 @@ export const useGoogleBarData = (year, month) => {
     },
     animation: {
       duration: 600,
-      easing: "in"
+      easing: "in",
     },
     isStacked: true,
+    vAxis: { textColor: theme.text },
+    hAxis: { textColor: theme.text },
   };
   useEffect(() => {
     setAmounts([]);
     getLastThreeMonthsAmounts(parseInt(year), parseInt(month)).then((data) => {
       let prevMonthIdx = 0;
       data.forEach((currMonth) => {
-        debugger;
         if (month - (currMonth.month + prevMonthIdx) === 2) {
           setAmounts([{}, {}, currMonth]);
         } else if (month - (currMonth.month + prevMonthIdx) === 1) {
@@ -79,7 +89,7 @@ export const useGoogleBarData = (year, month) => {
       });
     });
     //eslint-disable-next-line
-  }, [year, month]);
+  }, [year, month, expensesStorage]);
 
   return { barData, barOptions };
 };

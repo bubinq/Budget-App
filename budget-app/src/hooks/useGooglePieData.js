@@ -4,12 +4,14 @@ import _ from "lodash";
 import { useTheme } from "./useTheme";
 import { MonthlyDistributionContext } from "../context/monthlyDistributionContext";
 import { BudgetContext } from "../context/budgetContext";
+import { ExpenseContext } from "../context/expenseContext";
 
 export const useGooglePieData = (year, month) => {
   const { user } = useContext(BudgetContext);
   const { monthlyExpenses, dispatcher } = useContext(
     MonthlyDistributionContext
   );
+  const { expensesStorage } = useContext(ExpenseContext);
 
   const theme = useTheme();
   const amountByCategory = _.chain(monthlyExpenses)
@@ -35,7 +37,7 @@ export const useGooglePieData = (year, month) => {
     chartArea: {
       width: "85%",
       height: 220,
-    }
+    },
   };
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export const useGooglePieData = (year, month) => {
     };
     getMonthlyDistribution();
     //eslint-disable-next-line
-  }, [year, month, user]);
+  }, [year, month, user, expensesStorage]);
 
   return { data, options };
 };

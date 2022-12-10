@@ -15,7 +15,7 @@ const router = express.Router();
 router.get("/all/:userId", getAllUserExpenses);
 router.post("/getLatest", verifyToken, getLastThreeMonthsAmounts);
 router.post("/userPref/:userId", getUserPrefExpenses);
-router.get("/monthly/:userId", getMonthlyUserExpenses);
+router.post("/monthly/:userId", getMonthlyUserExpenses);
 router.get("/recent/:userId", getRecentUserExpenses);
 router.post("/create", verifyToken, addExpense);
 router.delete("/delete/:expenseId", verifyToken, deleteExpense);
