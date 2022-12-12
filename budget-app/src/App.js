@@ -4,12 +4,15 @@ import { ManageExpenses } from "./pages/ManageExpenses";
 import { Statistics } from "./pages/Statistics";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+import { PrivateGuard } from "./guards/PrivateGuard";
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<ManageExpenses />}></Route>
-        <Route path="/stats" element={<Statistics />}></Route>
+        <Route element={<PrivateGuard />}>
+          <Route path="/stats" element={<Statistics />}></Route>
+        </Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
       </Routes>

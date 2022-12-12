@@ -2,7 +2,7 @@ import Budget from "../models/budget.js";
 
 export const getUserBudget = async (req, res) => {
   try {
-    const budget = await Budget.find({ownerId: req.params.userId})
+    const budget = await Budget.findOne({ ownerId: req.params.userId });
     res.status(200).json(budget);
   } catch (error) {
     console.log(error.message);
@@ -25,10 +25,11 @@ export const setBudget = async (req, res) => {
 };
 
 export const editBudget = async (req, res) => {
+  const { amount, type } = req.body;
   try {
     const budget = await Budget.findOneAndUpdate(
-      { id: req.params.budgetId },
-      { $set: { amount: req.body.amount } },
+      { ownerId: req.user.id },
+      { $inc: { amount: type === "Increase" ? amount : -amount } },
       { new: true }
     );
     res.status(200).json(budget);

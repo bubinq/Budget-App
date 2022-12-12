@@ -7,6 +7,6 @@ const router = express.Router()
 
 router.get("/get/:userId", getUserBudget)
 router.post("/create", verifyToken, setBudget)
-router.put("/edit/:budgetId", verifyToken, editBudget)
+router.put("/edit", verifyToken, editBudget)
 
 export default router;

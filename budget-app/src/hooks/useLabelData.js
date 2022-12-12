@@ -13,7 +13,7 @@ export function useLabelData() {
     .groupBy("category")
     .map((obj, idx) => {
       return {
-        percentage: (_.sumBy(obj, "amount") / (budget[0]?.amount || noBudget)) * 100,
+        percentage: (_.sumBy(obj, "amount") / (budget?.amount || noBudget)) * 100,
         category: idx,
         color: obj[0].color,
       };

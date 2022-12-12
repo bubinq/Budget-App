@@ -38,6 +38,7 @@ export const useGooglePieData = (year, month) => {
       width: "85%",
       height: 220,
     },
+    fontSize: 18,
   };
 
   useEffect(() => {

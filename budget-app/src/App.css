@@ -327,7 +327,7 @@ select {
   margin: 0 auto;
   margin-top: -20px;
   gap: 20px;
-  box-shadow: -2px -1px 6px 1px rgba(0,0,0,0.32);
+  box-shadow: -2px -1px 6px 1px rgba(0, 0, 0, 0.32);
   z-index: 1000;
 }
 
@@ -336,6 +336,11 @@ select {
   margin-left: 20px;
   font-size: 1.6em;
   color: rgb(255, 72, 136);
+}
+
+.budgetWrapper {
+  display: flex;
+  gap: 8px;
 }
 
 .tansactionsHeading {
@@ -357,6 +362,10 @@ select {
   height: 200px;
   padding-bottom: 40px;
   overflow-y: auto;
+}
+
+.expenseRemove {
+  width: fit-content;
 }
 
 .expenseItem {
@@ -437,8 +446,9 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-.monthSelect, .yearSelect {
-  background-color:#3a4356;
+.monthSelect,
+.yearSelect {
+  background-color: #3a4356;
   margin-top: 5px;
   padding: 6px;
   border: none;
@@ -448,7 +458,46 @@ input:checked + .slider:before {
   display: flex;
   gap: 5px;
 }
-.monthWrapper, .yearWrapper {
+
+.overlay {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.403);
+  z-index: 1001;
+}
+.budgetModal {
+  position: absolute;
+
+  top: 30%;
+  z-index: 1002;
+}
+.budgetModal > form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.budgetModal > form > input {
+  padding: 6px 6px;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.1em;
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgb(255, 72, 136);
+}
+
+.budgetModal > form > label {
+  font-size: 1.2em;
+}
+.monthWrapper,
+.yearWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;

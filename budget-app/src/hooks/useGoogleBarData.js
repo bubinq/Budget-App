@@ -7,8 +7,8 @@ import { ExpenseContext } from "../context/expenseContext";
 
 export const useGoogleBarData = (year, month) => {
   const [amounts, setAmounts] = useState([]);
+  const { expenses } = useContext(ExpenseContext);
   const theme = useTheme();
-  const { expensesStorage } = useContext(ExpenseContext);
 
   const lastThreeMonths = getLastThreeMonths(year, month);
   const barData = [
@@ -89,7 +89,7 @@ export const useGoogleBarData = (year, month) => {
       });
     });
     //eslint-disable-next-line
-  }, [year, month, expensesStorage]);
+  }, [year, month, expenses]);
 
   return { barData, barOptions };
 };

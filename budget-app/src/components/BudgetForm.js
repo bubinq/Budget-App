@@ -7,12 +7,17 @@ import { ErrorMessage } from "./ErrorMessage";
 import { ExpenseContext } from "../context/expenseContext";
 import { useNavigate } from "react-router-dom";
 import { getBudgetColor } from "../utilities";
+import { BsPlusCircle } from "react-icons/bs";
+import { FiMinusCircle } from "react-icons/fi";
+import { BudgetModal } from "./BudgetModal";
 
 export const BudgetForm = () => {
   const theme = useTheme();
   const { dispatcher, budget, user } = useContext(BudgetContext);
   const { expenses } = useContext(ExpenseContext);
   const [error, setError] = useState({ message: "" });
+  const [showBudgetModal, setShowBudgetModal] = useState(false);
+  const [budgetType, setBudgetType] = useState("");
   const navigatoTo = useNavigate();
 
   const totalExpenses = expenses.reduce(
@@ -55,8 +60,13 @@ export const BudgetForm = () => {
 
   const handleRedirect = () => {
     if (!user) {
-      navigatoTo("/login")
+      navigatoTo("/login");
     }
+  };
+
+  const showBudgetModalHandler = (type) => {
+    setBudgetType(type)
+    setShowBudgetModal(!showBudgetModal);
   };
 
   useEffect(() => {
@@ -75,7 +85,7 @@ export const BudgetForm = () => {
   return (
     <div className="budgetTotal">
       <h1 style={{ color: theme.text }}>Budget Total:</h1>
-      {!budget[0]?.amount && (
+      {!budget?.amount && (
         <form onSubmit={handleSubmit}>
           <input
             style={{ color: theme.text }}
@@ -94,23 +104,45 @@ export const BudgetForm = () => {
       )}
 
       {error.message && <ErrorMessage message={error.message}></ErrorMessage>}
-      {budget[0]?.amount && (
+      {budget?.amount && (
         <>
-          <span className="budgetAmount" style={{ color: theme.text }}>
-            Initial: ${budget[0].amount}
-          </span>
+          <div className="budgetWrapper">
+            <BsPlusCircle
+              onClick={() => showBudgetModalHandler("Increase")}
+              style={{
+                color: theme.text,
+                width: "20px",
+                height: "20px",
+                cursor: "pointer",
+              }}
+            ></BsPlusCircle>
+            <span className="budgetAmount" style={{ color: theme.text }}>
+              Initial: ${budget.amount}
+            </span>
+            <FiMinusCircle
+              onClick={() => showBudgetModalHandler("Decrease")}
+              style={{
+                color: theme.text,
+                width: "20px",
+                height: "20px",
+                cursor: "pointer",
+              }}
+            ></FiMinusCircle>
+          </div>
+
           <span
             style={{
               color: getBudgetColor(
-                budget[0].amount,
-                budget[0].amount - totalExpenses
+                budget.amount,
+                budget.amount - totalExpenses
               ),
             }}
           >
-            Current: ${budget[0].amount - totalExpenses}
+            Current: ${budget.amount - totalExpenses}
           </span>
         </>
       )}
+      {showBudgetModal && <BudgetModal show={setShowBudgetModal} type={budgetType} current={budget.amount - totalExpenses}></BudgetModal>}
     </div>
   );
 };
